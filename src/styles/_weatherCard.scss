@@ -1,0 +1,53 @@
+@import 'variables';
+
+.weather-card { 
+
+
+    .divider {
+        width: 100%;
+        display: flex;
+        gap: px-to-rem(55px);
+        margin-inline: px-to-rem(80px);
+        margin-top: px-to-rem(49px);
+
+        & > div{
+            background: #444444;
+        }
+    }
+
+    .country-info {
+        width: px-to-rem(510px);
+        height: px-to-rem(330px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 10px 10px 4px 0px #00000080;
+        border-radius: px-to-rem(30px);
+    }
+
+    .weather-details,
+    .five-days-forecast,
+    .hourly-forecast {
+        padding: 1rem;
+        border-radius: px-to-rem(30px);
+        box-shadow: 10px 10px 4px 0px #00000080;
+    }
+
+    .weather-details {
+        display: flex;
+        gap: 1rem;
+        width: px-to-rem(780px);
+        height: px-to-rem(330px);
+    }
+
+    .five-days-forecast {
+        width: px-to-rem(414px);
+        height: px-to-rem(366px);
+    }
+
+    .hourly-forecast {
+        width: px-to-rem(870px);
+        height: px-to-rem(366px);
+    }
+}

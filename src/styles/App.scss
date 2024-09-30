@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import 'variables';
+@import 'nav';
+@import 'weatherCard';
+
+// Mixin for button styles
+@mixin button-styles($bg-color, $text-color) {
+  background-color: $bg-color;
+  color: $text-color;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: $accent-light;
+  }
+
+  &:focus {
+    outline: 2px solid $secondary-light;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 84%;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  transition: background-color 0.3s ease;
+  line-height: 1.5;
+  font-size: 16px;
+  background: $background-dark;
+  color: $text-dark;
+
+  button {
+    @include button-styles($primary-dark, $background-dark);
+  }
+
+  &.light {
+    background-color: $background-light;
+    color: $text-light;
+
+    button {
+      @include button-styles($primary-light, $background-light);
+    }
+  }
+
+}
+
+// Additional styles
+a {
+  color: $primary-light;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// Media Queries
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+
+    button {
+      padding: 0.4rem 0.8rem;
+    }
+  }
+}
