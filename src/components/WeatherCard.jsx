@@ -1,4 +1,5 @@
 import React from 'react';
+import image from '../assets/overcast_icon.png'
 
 
 const WeatherCard = ({ weather, country }) => {
@@ -49,7 +50,7 @@ const WeatherCard = ({ weather, country }) => {
                        <p>{current.sunrise}</p>
                     </div>
                     <div className="weather-icon">
-                        <img src="../assets/overcast_icon.png" alt="" />
+                        <img src={image} style={{width: '90px', height: '80px'}} alt="" />
                         <p>{feedback}</p>
                     </div>
                     <div className="extra-details">
@@ -63,10 +64,11 @@ const WeatherCard = ({ weather, country }) => {
             <div className='divider'> 
             <div className="five-days-forecast">
                 <h2>5-Day Weather Forecast</h2>
-                <ul>
+                <ul style={{listStyle: 'none'}}>
                     {forecast.map(({ date, maxTemp, minTemp }) => (
                         <li key={date}>
-                            {date} {maxTemp}°C
+                            <img src={image} style={{width: '50px', height: '30px'}} alt="" />
+                             {maxTemp}°C {date}
                         </li>
                     ))}
                 </ul>
@@ -75,8 +77,11 @@ const WeatherCard = ({ weather, country }) => {
                 <h2>Hourly Forecast</h2>
                 <ul>
                     {hourlyForecast.map(({ dateTime, temperature, windSpeed }) => (
-                        <li key={dateTime}>
-                            {dateTime}: Temperature: {temperature}°C, Wind Speed: {windSpeed} km/h
+                        <li key={dateTime} style={{display: 'inline-block', margin: '1rem'}}>
+                            <img src={image} style={{width: '50px', height: '30px'}} alt="" />
+                            {/* <p>{dateTime} </p> */}
+                            <p>{temperature}°C</p>
+                            <p>{windSpeed} km/h</p>
                         </li>
                     ))}
                 </ul>

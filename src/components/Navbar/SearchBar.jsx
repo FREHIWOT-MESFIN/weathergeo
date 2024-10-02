@@ -3,7 +3,7 @@ import React from 'react';
 const SearchBar = ({ value, onChange }) => {
     return (
         <div className="search-bar">
-            <i class="ri-search-line"></i>
+            <i className="ri-search-line"></i>
             <input
                 type="text"
                 value={value}

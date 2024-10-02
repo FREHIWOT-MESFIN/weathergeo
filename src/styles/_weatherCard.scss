@@ -4,7 +4,6 @@
 
 
     .divider {
-        width: 100%;
         display: flex;
         gap: px-to-rem(55px);
         margin-inline: px-to-rem(80px);
@@ -36,9 +35,14 @@
 
     .weather-details {
         display: flex;
+        align-items: center;
         gap: 1rem;
         width: px-to-rem(780px);
         height: px-to-rem(330px);
+
+        & > div{
+            flex: 1;
+        }
     }
 
     .five-days-forecast {

@@ -12,7 +12,7 @@ function Nav({value, onChange}) {
       {/* <i className="ri-toggle-fill"></i> */}
       <SearchBar value={value} onChange={onChange}/>
       <div className='cu-location'>
-        <i class="ri-crosshair-2-fill"></i>
+        <i className="ri-crosshair-2-fill"></i>
         <p>Current Location</p>
       </div>
     </div>
