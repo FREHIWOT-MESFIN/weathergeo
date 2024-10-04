@@ -6,10 +6,12 @@ function Nav({value, onChange}) {
   return (
     <div className='nav-container'>
       <div className="theme-toggle">
-        <i className="ri-toggle-line"></i>
+        <div className="toggle">
+          <div className="ellipse">
+          </div>
+        </div>
         <p>Dark Mode</p>
       </div>
-      {/* <i className="ri-toggle-fill"></i> */}
       <SearchBar value={value} onChange={onChange}/>
       <div className='cu-location'>
         <i className="ri-crosshair-2-fill"></i>

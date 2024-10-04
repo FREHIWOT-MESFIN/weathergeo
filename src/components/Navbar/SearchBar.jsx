@@ -8,7 +8,7 @@ const SearchBar = ({ value, onChange }) => {
                 type="text"
                 value={value}
                 onChange={e => onChange(e.target.value)}
-                placeholder="Enter city..."
+                placeholder="Search for your preffered city..."
                 className="border p-2 rounded"
             />
         </div>

@@ -1,16 +1,20 @@
 @import 'variables';
 
-.weather-card { 
-
+.weather-card {
+    text-align: center;
+    width: 100%;
 
     .divider {
         display: flex;
         gap: px-to-rem(55px);
         margin-inline: px-to-rem(80px);
-        margin-top: px-to-rem(49px);
+        margin-block: px-to-rem(49px);
 
-        & > div{
+        & > div {
             background: #444444;
+            border-radius: px-to-rem(30px);
+            box-shadow: 10px 10px 4px 0px #00000080;
+            padding: 1rem;
         }
     }
 
@@ -21,37 +25,91 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        box-shadow: 10px 10px 4px 0px #00000080;
-        border-radius: px-to-rem(30px);
-    }
-
-    .weather-details,
-    .five-days-forecast,
-    .hourly-forecast {
-        padding: 1rem;
-        border-radius: px-to-rem(30px);
-        box-shadow: 10px 10px 4px 0px #00000080;
     }
 
     .weather-details {
         display: flex;
-        align-items: center;
-        gap: 1rem;
+        gap: .5rem;
         width: px-to-rem(780px);
         height: px-to-rem(330px);
 
-        & > div{
+        & > div {
             flex: 1;
+            height: 100%;
+
+            & > div {
+                display: flex;
+                gap: 2rem;
+
+                & > div{
+                    display: flex;
+                }
+            }
         }
     }
 
     .five-days-forecast {
-        width: px-to-rem(414px);
+        width: px-to-rem(414px); 
         height: px-to-rem(366px);
+        padding: 1rem;
+        border-radius: px-to-rem(30px);
+        box-shadow: 10px 10px 4px 0px #00000080;
+        
+        ul{
+          display: flex;  
+          flex-direction: column;
+          gap: 1rem;
+          justify-content: center;
+          font-size: px-to-rem(20px);
+        }
+
+        h2 {
+            margin-bottom: 1rem; 
+        }
     }
 
     .hourly-forecast {
-        width: px-to-rem(870px);
+        width: px-to-rem(870px); 
         height: px-to-rem(366px);
+        
+        border-radius: px-to-rem(30px);
+        box-shadow: 10px 10px 4px 0px #00000080;
+
+        h2 {
+            margin-bottom: 1rem; 
+        }
+
+        ul{
+            display: flex;
+            justify-content: center;
+            gap: 1rem; 
+            list-style: none;
+        }
+
+        li{
+             background: #373636;
+             padding-top: px-to-rem(40px);
+             width: px-to-rem(130px);
+             height: px-to-rem(270px);
+             border-radius: 40px;
+        }
     }
 }
+
+
+
+@media (max-width: 768px) {
+    .divider {
+      flex-wrap: wrap;
+      margin: auto;
+    }
+  
+    .hourly-forecast{
+      height: auto
+    }
+  
+    .hourly-forecast ul{
+      flex-wrap: wrap;
+    }
+  }
+  

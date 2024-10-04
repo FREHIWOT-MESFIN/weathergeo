@@ -1,16 +1,19 @@
 // Color Variables
-$background-light: #FFFFFF;
+$background-light: linear-gradient(112.65deg, #FFFFFF 0.28%, rgba(70, 97, 115, 0) 178.65%);
 $text-light: #212121;
 $primary-light: #6200EE;
 $secondary-light: #03A9F4;
 $accent-light: #FF4081;
+$align-light: flex-start;
 
 $background-dark: linear-gradient(110.05deg, #383838 0%, rgba(158, 158, 158, 0) 71.82%);
-$text-dark: #E0E0E0;
+$text-dark: #FFFFFF;
 $primary-dark: #BB86FC;
 $secondary-dark: #03DAC6;
 $accent-dark: #FF5722;
+$align-dark: flex-end;
 $base-font-size: 16px;
+
 
 @function px-to-rem($px) {
   @return $px / $base-font-size * 1rem;

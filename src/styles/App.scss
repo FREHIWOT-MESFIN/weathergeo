@@ -3,6 +3,12 @@
 @import 'nav';
 @import 'weatherCard';
 
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 // Mixin for button styles
 @mixin button-styles($bg-color, $text-color) {
   background-color: $bg-color;
@@ -22,12 +28,6 @@
   }
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 html {
   font-size: 84%;
 }
@@ -35,21 +35,18 @@ html {
 html, body {
   margin: 0;
   padding: 0;
+  background-color: #323131;
   width: 100%;
   height: 100%;
 }
 
 .app{
-  width: 100vw;
+  max-width: 100vw;
   font-family: 'Poppins', sans-serif;
   transition: background-color 0.3s ease;
   line-height: 1.5;
   font-size: 16px;
   background: $background-dark;
-  background-attachment: fixed;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
   color: $text-dark;
 
   button {
@@ -57,7 +54,7 @@ html, body {
   }
 
   &.light {
-    background-color: $background-light;
+    background: $background-light;
     color: $text-light;
 
     button {
