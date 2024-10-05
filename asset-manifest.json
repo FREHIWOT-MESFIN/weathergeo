@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/weathergeo/static/css/main.da24732e.css",
-    "main.js": "/weathergeo/static/js/main.b3bc9d07.js",
+    "main.js": "/weathergeo/static/js/main.16a89d31.js",
     "static/js/453.37a8b230.chunk.js": "/weathergeo/static/js/453.37a8b230.chunk.js",
     "static/media/overcast_icon.png": "/weathergeo/static/media/overcast_icon.2f917835405e263543c3.png",
     "static/media/rainy_icon.png": "/weathergeo/static/media/rainy_icon.2171eacbc503208fd19d.png",
@@ -11,11 +11,11 @@
     "static/media/snowy_icon.png": "/weathergeo/static/media/snowy_icon.4b6eb5e0d5a9a7f421e6.png",
     "index.html": "/weathergeo/index.html",
     "main.da24732e.css.map": "/weathergeo/static/css/main.da24732e.css.map",
-    "main.b3bc9d07.js.map": "/weathergeo/static/js/main.b3bc9d07.js.map",
+    "main.16a89d31.js.map": "/weathergeo/static/js/main.16a89d31.js.map",
     "453.37a8b230.chunk.js.map": "/weathergeo/static/js/453.37a8b230.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.da24732e.css",
-    "static/js/main.b3bc9d07.js"
+    "static/js/main.16a89d31.js"
   ]
 }
