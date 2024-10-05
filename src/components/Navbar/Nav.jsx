@@ -20,7 +20,7 @@ function Nav({ value, onSearch }) {
         <div className="toggle">
           <div className="ellipse"></div>
         </div>
-        <p>Dark Mode</p>
+        <p>{isDarkMode ? 'Dark Mode' : 'Light Mode'}</p>
       </div>
       <SearchBar value={value} onSearch={onSearch} />
       <div className='cu-location'>
