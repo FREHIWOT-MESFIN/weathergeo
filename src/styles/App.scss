@@ -36,21 +36,30 @@ html, body {
   margin: 0;
   padding: 0;
   background-color: #323131;
-  width: 100%;
-  height: 100%;
 }
+
+.highlight-background {
+  background-color: $accent-light;
+}
+
 
 .app{
   max-width: 100vw;
+  width: 100%;
+  height: 100%;
   font-family: 'Poppins', sans-serif;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease-in;
   line-height: 1.5;
   font-size: 16px;
-  background: $background-dark;
-  color: $text-dark;
+  overflow: auto;
 
-  button {
-    @include button-styles($primary-dark, $background-dark);
+  &.dark{
+    background: $background-dark;
+    color: $text-dark;
+
+    button {
+      @include button-styles($primary-dark, $background-dark);
+    }
   }
 
   &.light {
@@ -75,12 +84,27 @@ a {
 }
 
 // Media Queries
+
+@media (max-width: 1200px) {
+  body {
+      font-size: 15px; /* Slightly smaller on large tablets */
+  }
+}
+
+@media (max-width: 992px) {
+  body {
+      font-size: 14px; /* Smaller for tablets */
+  }
+}
+
 @media (max-width: 768px) {
   body {
-    font-size: 14px;
+      font-size: 13px; /* Smaller for mobile devices */
+  }
+}
 
-    button {
-      padding: 0.4rem 0.8rem;
-    }
+@media (max-width: 576px) {
+  body {
+      font-size: 12px; /* Smallest for extra small devices */
   }
 }

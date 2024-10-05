@@ -11,9 +11,16 @@ const WeatherCard = ({ weather, country }) => {
         return <p>No weather data available.</p>;
     }
 
-    const { current, hourly, daily } = weather;
-    const { temperature_2m, time: hourlyTime, wind_speed_10m } = hourly;
-    const { temperature_2m_max, temperature_2m_min, time: dailyTime, weather_code } = daily;
+    const { current, hourly = {}, daily = {} } = weather;
+
+    // Destructure properties with fallback
+    const { temperature_2m, time: hourlyTime = [], wind_speed_10m = [] } = hourly;
+    const { temperature_2m_max = [], temperature_2m_min = [], time: dailyTime = [], weather_code = [], sunrise = [], sunset = [], uv_index_max = [] } = daily;
+
+    // Check if daily data exists
+    if (!Array.isArray(dailyTime) || dailyTime.length === 0) {
+        return <p>No daily weather data available.</p>;
+    }
 
     // Determine feedback and icon based on weather conditions
     let feedback = 'Unknown Weather';
@@ -43,15 +50,15 @@ const WeatherCard = ({ weather, country }) => {
 
     const forecast = dailyTime.slice(0, 5).map((date, index) => ({
         date,
-        maxTemp: temperature_2m_max[index],
-        minTemp: temperature_2m_min[index],
+        maxTemp: temperature_2m_max[index] !== undefined ? temperature_2m_max[index] : 'N/A',
+        minTemp: temperature_2m_min[index] !== undefined ? temperature_2m_min[index] : 'N/A',
     }));
 
-    const hourlyForecast = hourlyTime.slice(0, 5).map((dateTime, index) => ({
+    const hourlyForecast = hourlyTime.length > 0 ? hourlyTime.slice(0, 5).map((dateTime, index) => ({
         dateTime,
-        temperature: temperature_2m[index],
-        windSpeed: (wind_speed_10m[index] * 3.6).toFixed(1), // Convert m/s to km/h
-    }));
+        temperature: temperature_2m[index] !== undefined ? temperature_2m[index] : 'N/A',
+        windSpeed: (wind_speed_10m[index] !== undefined ? wind_speed_10m[index] : 0 * 3.6).toFixed(1),
+    })) : [];
 
     const formatDateTime = (datetime) => {
         const date = new Date(datetime);
@@ -63,19 +70,19 @@ const WeatherCard = ({ weather, country }) => {
     };
 
     const formattedDateTime = formatDateTime(current.time);
-    const currentDateIndex = daily.time.findIndex(date => date === current.time.split('T')[0]);
-    const sunriseTime = daily.sunrise[currentDateIndex];
-    const sunsetTime = daily.sunset[currentDateIndex];
-    const formattedSunrise = formatDateTime(sunriseTime);
-    const formattedSunset = formatDateTime(sunsetTime);
-    const uvIndexMax = daily.uv_index_max[0];
+    const currentDateIndex = dailyTime.findIndex(date => date === current.time.split('T')[0]);
+    const sunriseTime = currentDateIndex >= 0 ? sunrise[currentDateIndex] : null;
+    const sunsetTime = currentDateIndex >= 0 ? sunset[currentDateIndex] : null;
+    const formattedSunrise = sunriseTime ? formatDateTime(sunriseTime) : { formattedTime: 'N/A' };
+    const formattedSunset = sunsetTime ? formatDateTime(sunsetTime) : { formattedTime: 'N/A' };
+    const uvIndexMax = uv_index_max[0] !== undefined ? uv_index_max[0] : 'N/A';
 
     return (
         <div className="weather-card">
             <div className='divider'>
                 <div className="country-info">
                     <h3>{country}</h3>
-                    <h1 style={{ color: 'hsl(0, 0%, 99%)', marginTop: '2rem' }}>{formattedDateTime.formattedTime}</h1>
+                    <h1 style={{marginTop: '2rem' }}>{formattedDateTime.formattedTime}</h1>
                     <p>{formattedDateTime.formattedDate}</p>
                 </div>
                 <div className="weather-details">
@@ -84,17 +91,17 @@ const WeatherCard = ({ weather, country }) => {
                         <p style={{marginBottom: '2rem'}}>Feels like {current.apparent_temperature} °C</p>
                         <div className="sunrise">
                             <FaSun size={30} title="Sunrise" />
-                            <div>
-                             <p>Sunrise</p>
+                            <span>
+                              <p>Sunrise</p>
                               <p>{formattedSunrise.formattedTime}</p>
-                            </div>
+                            </span>
                         </div>
                         <div className="sunset">
                             <FaMoon size={30} title="Sunset" />
-                            <p>
+                            <span>
                              <p>Sunset</p>
                              <p>{formattedSunset.formattedTime}</p>
-                            </p>
+                            </span>
                         </div>
                     </div>
                     <div className="weather-icon" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -131,7 +138,7 @@ const WeatherCard = ({ weather, country }) => {
             </div>
             <div className='divider'>
                 <div className="five-days-forecast">
-                    <h2>5-Day Weather Forecast:</h2>
+                    <h2>5-Day Weather Forecast</h2>
                     <ul>
                         {forecast.map(({ date, maxTemp, minTemp }) => {
                             const formattedDailyDate = formatDateTime(date);
@@ -147,17 +154,21 @@ const WeatherCard = ({ weather, country }) => {
                 </div>
                 <div className="hourly-forecast">
                     <h2>Hourly Forecast</h2>
-                    <ul>
-                        {hourlyForecast.map(({ dateTime, temperature, windSpeed }) => (
-                            <li key={dateTime}>
-                                <p>{formatDateTime(dateTime).formattedTime}</p>
-                                <img src={weatherIcon} style={{ width: '50px', height: '30px' }} alt="" />
-                                <p>{temperature}°C</p>
-                                <img src={icons.direction} alt="" />
-                                <p>{windSpeed} km/h</p>
-                            </li>
-                        ))}
-                    </ul>
+                    {hourlyForecast.length > 0 ? (
+                        <ul>
+                            {hourlyForecast.map(({ dateTime, temperature, windSpeed }) => (
+                                <li key={dateTime} className={(weatherIcon === icons.sunny || weatherIcon === icons.sunnyRain) ? 'highlight-background' : ''}>
+                                    <p>{formatDateTime(dateTime).formattedTime}</p>
+                                    <img src={weatherIcon} style={{ width: '50px', height: '30px' }} alt="" />
+                                    <p>{temperature}°C</p>
+                                    <img src={icons.direction} alt="" />
+                                    <p>{windSpeed} km/h</p>
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <p>No hourly data available.</p>
+                    )}
                 </div>
             </div>
         </div>
